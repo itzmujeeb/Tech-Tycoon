@@ -1,0 +1,84 @@
+#include <stdio.h>
+
+#include <iostream>
+
+using namespace std;
+
+#define Total_students 5 
+class student
+{
+    private:
+        char    name_student[20]; // The number of students can varry, for sample test scenario we are taking 5
+       
+
+    public:
+        int     student_behaviour; // 1. Good Understanding 2. Require Further Information 3. Not Interested in the topic
+        void fetch_student_info(void);
+        void fetch_response(void);
+        void display_student_info(void);
+        void display_behaviour(void);
+        
+};
+
+
+void student::fetch_student_info(void)
+{
+    cout << "Enter Student's Name:";
+    cin >> name_student;
+}
+
+void student::fetch_response(void)
+{
+    cin >> student_behaviour;
+}
+
+ 
+void student::display_student_info(void)
+{
+    cout << "Student's Name:"<< name_student<<"\n";
+}
+
+void student::display_behaviour(void)
+{
+    cout << "Student Name and Behavioral Feedback:\n";
+    
+    cout << "Name:"<< name_student << "Behaviour:" << student_behaviour <<"\n";
+}
+
+
+int main()
+{
+    student student_record[5]; // lets Assume we have 5 students in the class
+    int counter_not_interested = 0;
+    int counter_interested = 0;
+    
+    for(int index=0; index < Total_students; index++)
+    {
+        cout << "Enter Name of student " << ":\n";
+        student_record[index].fetch_student_info();
+    }
+     
+     
+    cout<< "Are you Understanding the Concept? Choose options   1. Good Understanding 2. Require Further Information 3. Not interested in the topic" << endl;
+    
+    for(int index=0; index < Total_students; index++)
+    {
+        student_record[index].display_student_info(); // showing student info
+        student_record[index].fetch_response(); // Getting student input that will be delivered to the teacher
+    }
+    
+    // count the number of students who are interested or not
+    for(int index=0; index < Total_students; index++)
+    {
+        if( student_record[index].student_behaviour > 2)
+            counter_not_interested++;
+        else
+            counter_interested++;
+    }
+    
+    cout << "######################## STATS ########################"<<endl;
+    cout << "Total students who are intersted in class:"<<counter_interested<<endl;
+    cout << "Total students who are not intersted in class:"<<counter_not_interested;
+    
+    return 0;
+}
